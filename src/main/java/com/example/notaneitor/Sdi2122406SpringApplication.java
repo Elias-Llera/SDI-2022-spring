@@ -10,4 +10,5 @@ public class Sdi2122406SpringApplication {
         SpringApplication.run(Sdi2122406SpringApplication.class, args);
     }
 
+
 }
