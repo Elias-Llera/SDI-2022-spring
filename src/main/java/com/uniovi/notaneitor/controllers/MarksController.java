@@ -15,7 +15,7 @@ public class MarksController {
 
     @RequestMapping("/mark/list")
     public String getList(Model model){
-        model.addAttribute("markList", marksService.getMarks().toString());
+        model.addAttribute("markList", marksService.getMarks());
         return "mark/list";
     }
 
@@ -32,7 +32,7 @@ public class MarksController {
 
     @RequestMapping("/mark/details/{id}")
     public String getDetail(Model model, @PathVariable Long id) {
-        model.addAttribute("mark", marksService.getMark(id).toString());
+        model.addAttribute("mark", marksService.getMark(id));
         return "mark/details";
     }
 
