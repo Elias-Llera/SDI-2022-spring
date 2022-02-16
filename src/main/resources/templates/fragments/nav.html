@@ -40,12 +40,33 @@
         </ul>
 
         <ul class="navbar-nav justify-content-end">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="btnLanguage" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span th:text="#{language.change}"></span>
+                </a>
+
+                <div id="languageDropdownMenuButton" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" id="btnEnglish" value="EN">
+                        <img src="/images/if_uk_flag.png" style="border: 0;
+                            float: left; margin-right: 15px"/>
+                        <span th:text="#{language.en}"></span>
+                    </a>
+                    <a class="dropdown-item" id="btnSpanish" value="ES">
+                        <img src="/images/if_spain_flag.png" style="border: 0;
+                            float: left; margin-right: 15px"/>
+                        <span th:text="#{language.es}"></span>
+                    </a>
+                </div>
+            </li>
+
             <li class="nav-item">
-                <a class="nav-link" href="/registrarse">
+                <a class="nav-link" href="/signup" th:text="#{signup.message}">
                     <i class='fas fa-user-alt' style='font-size:16px'></i>
                     Registrate</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="/identificarse">
+            <a class="nav-link" href="/login" th:text="#{login.message}">
                 <i class='fas fa-sign-in-alt' style='font-size:16px'></i>
                 Identifícate</a></li>
         </ul>
