@@ -1,5 +1,6 @@
 package com.uniovi.notaneitor.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ public class Professor {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(unique = true)
     private String dni;
     private String name;
     private String surname;
