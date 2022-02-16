@@ -1,6 +1,9 @@
 package com.uniovi.notaneitor.services;
 
+import com.uniovi.notaneitor.entities.Mark;
 import com.uniovi.notaneitor.entities.Professor;
+import com.uniovi.notaneitor.repositories.ProfessorsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -10,45 +13,25 @@ import java.util.List;
 @Service
 public class ProfessorsService {
 
-    List<Professor> professors;
-
-    @PostConstruct
-    public void init(){
-        professors = new ArrayList<>();
-        professors.add(new Professor("123", "profName1", "profSur1", "cat1" ));
-        professors.add(new Professor("456", "profName2", "profSur2", "cat2" ));
-        professors.add(new Professor("789", "profName3", "profSur3", "cat3" ));
-    }
+    @Autowired
+    ProfessorsRepository professorsRepository;
 
     public List<Professor> getProfessors() {
+        List<Professor> professors = new ArrayList<Professor>();
+        professorsRepository.findAll().forEach((professors::add));
         return professors;
     }
 
+    public Professor getProfessor(Long id) {
+        return professorsRepository.findById(id).get();
+    }
+
     public void addProfessor(Professor professor) {
-        professors.add(professor);
+        professorsRepository.save(professor);
     }
 
-    public void deleteProfessor(String dni) {
-        professors.removeIf(professor -> professor.getDni().equals(dni));
+    public void deleteProfessor(Long id) {
+        professorsRepository.deleteById(id);
     }
 
-    public Professor getProfessor(String dni) {
-        for (Professor p: professors
-             ) {
-            if(p.getDni().equals(dni)){
-                return p;
-            }
-        }
-        return null;
-    }
-
-    public void updateProfessor(String dni, Professor professor) {
-        for(Professor p : professors){
-            if(p.getDni().equals(dni)){
-                p.setName(professor.getName());
-                p.setSurname(professor.getSurname());
-                p.setCategory(professor.getCategory());
-            }
-        }
-    }
 }
