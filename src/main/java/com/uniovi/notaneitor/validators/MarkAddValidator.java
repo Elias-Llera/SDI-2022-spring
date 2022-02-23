@@ -8,6 +8,7 @@ import org.springframework.validation.Validator;
 
 @Component
 public class MarkAddValidator implements Validator {
+
     @Override
     public boolean supports(Class<?> clazz) {
         return Mark.class.equals(clazz);

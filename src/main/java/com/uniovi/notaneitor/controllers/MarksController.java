@@ -1,7 +1,6 @@
 package com.uniovi.notaneitor.controllers;
 
 import com.uniovi.notaneitor.entities.Mark;
-import com.uniovi.notaneitor.entities.User;
 import com.uniovi.notaneitor.services.MarksService;
 import com.uniovi.notaneitor.services.UsersService;
 import com.uniovi.notaneitor.validators.MarkAddValidator;
@@ -22,10 +21,10 @@ public class MarksController {
     private MarksService marksService;
 
     @Autowired
-    UsersService usersService;
+    private UsersService usersService;
 
     @Autowired
-    MarkAddValidator markAddValidator;
+    private MarkAddValidator markAddValidator;
 
     @RequestMapping("/mark/list")
     public String getList(Model model) {

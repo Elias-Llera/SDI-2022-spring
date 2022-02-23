@@ -4,4 +4,7 @@ import com.uniovi.notaneitor.entities.Professor;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ProfessorsRepository extends CrudRepository<Professor, Long>{
+
+    Professor findByDni(String dni);
+
 }

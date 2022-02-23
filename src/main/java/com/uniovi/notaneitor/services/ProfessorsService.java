@@ -1,12 +1,10 @@
 package com.uniovi.notaneitor.services;
 
-import com.uniovi.notaneitor.entities.Mark;
 import com.uniovi.notaneitor.entities.Professor;
 import com.uniovi.notaneitor.repositories.ProfessorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +12,7 @@ import java.util.List;
 public class ProfessorsService {
 
     @Autowired
-    ProfessorsRepository professorsRepository;
+    private ProfessorsRepository professorsRepository;
 
     public List<Professor> getProfessors() {
         List<Professor> professors = new ArrayList<Professor>();
@@ -24,6 +22,10 @@ public class ProfessorsService {
 
     public Professor getProfessor(Long id) {
         return professorsRepository.findById(id).get();
+    }
+
+    public Professor getProfessorByDni(String dni){
+        return professorsRepository.findByDni(dni);
     }
 
     public void addProfessor(Professor professor) {
