@@ -42,6 +42,15 @@ public class UsersService {
         usersRepository.save(user);
     }
 
+    public void updateUser(User user){
+        User persistentUser = getUser(user.getId());
+        if(!persistentUser.equals(null)){
+            persistentUser.setDni(user.getDni());
+            persistentUser.setName(user.getName());
+            usersRepository.save(persistentUser);
+        }
+    }
+
     public void deleteUser(Long id) {
         usersRepository.deleteById(id);
     }
