@@ -8,6 +8,7 @@ import org.springframework.validation.*;
 
 @Component
 public class SignUpFormValidator implements Validator {
+
     @Autowired
     private UsersService usersService;
 
