@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class MarksService {
@@ -30,16 +28,8 @@ public class MarksService {
     }
 
     public Mark getMark(Long id){
-        Set<Mark> consultedList = (Set<Mark>) httpSession.getAttribute("consultedList");
-        if ( consultedList == null ) {
-            consultedList = new HashSet<Mark>();
-        }
-        Mark obtainedMark = marksRepository.findById(id).get();
-        consultedList.add(obtainedMark);
-        httpSession.setAttribute("consultedList", consultedList);
-        return obtainedMark;
+        return marksRepository.findById(id).get();
     }
-
 
     public void addMark(Mark mark) {
         marksRepository.save(mark);

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue
@@ -74,19 +74,27 @@ public class User {
         this.marks = marks;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
-    public String getPasswordConfirm(){
+    public String getPasswordConfirm() {
         return passwordConfirm;
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setPasswordConfirm(String passwordConfirm){
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
 
