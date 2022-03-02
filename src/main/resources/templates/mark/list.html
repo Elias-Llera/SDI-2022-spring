@@ -1,5 +1,5 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/head"></head>
 
@@ -36,67 +36,7 @@
     <p>Las notas que actualmente figuran en el sistema son las siguientes:</p>
 
     <div class="table-responsive">
-        <table class="table table-hover" th:fragment="tableMarks" id="tableMarks">
-            <thead>
-            <tr>
-                <th scope="col">id</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Puntuación</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="mark : ${markList}">
-                <td scope="row" th:text="${mark.id}"> 1</td>
-                <td th:text="${mark.description}"> Ejercicio 1</td>
-                <td th:text="${mark.score}">10</td>
-                <td><a th:href="${'/mark/details/' + mark.id}">detalles</a></td>
-                <td><a sec:authorize="hasRole('PROFESSOR')" th:href="${'/mark/edit/' + mark.id}">modificar</a>
-                    <div sec:authorize="hasRole('ROLE_STUDENT')" >
-                        <div th:if="${mark.resend}">
-                            <button type="button" th:id="${'resendButton' + mark.id}"
-                                    class="btn btn-success">Reenviar</button>
-                            <script th:inline="javascript">
-                                /*<![CDATA[*/
-                                $( "#resendButton"+ "[[${mark.id}]]").click(function() {
-                                    $.get( "/mark/[[${mark.id}]]/noresend", function( data ) {
-                                        var numberPage = [[${param.page}]];
-                                        var urlUpdate = '/mark/list/update';
-                                        if ( numberPage != null ){
-                                            urlUpdate += "?page="+numberPage[0];
-                                        }
-                                        $("#tableMarks").load(urlUpdate);
-                                    });
-                                });
-                                /*]]>*/
-                            </script>
-                        </div>
-                        <div th:unless="${mark.resend}">
-                            <button type="button" th:id="${'noresendButton' + mark.id}"
-                                    class="btn btn-info">No reenviar</button>
-                            <script th:inline="javascript">
-                                /*<![CDATA[*/
-                                $( "#noresendButton"+ "[[${mark.id}]]" ).click(function() {
-                                    $.get( "/mark/[[${mark.id}]]/resend", function( data ) {
-                                        var numberPage = [[${param.page}]];
-                                        var urlUpdate = '/mark/list/update';
-                                        if ( numberPage != null ){
-                                            urlUpdate += "?page="+numberPage[0];
-                                        }
-                                        $("#tableMarks").load(urlUpdate);
-                                    });
-                                });
-                                /*]]>*/
-                            </script>
-                        </div>
-                    </div>
-                </td>
-                <td><a sec:authorize="hasRole('PROFESSOR')" th:href="${'/mark/delete/' + mark.id}">eliminar</a></td>
-            </tr>
-            </tbody>
-        </table>
+        <table class="table table-hover" th:replace="fragments/marks_table" th:fragment="tableMarks" id="tableMarks" ></table>
     </div>
 	<div th:if="${#lists.isEmpty(markList)}"> No marks </div>
     <footer th:replace="fragments/pagination"/>
