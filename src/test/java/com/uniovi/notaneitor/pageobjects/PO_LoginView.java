@@ -6,19 +6,31 @@ import org.openqa.selenium.WebElement;
 
 public class PO_LoginView extends PO_NavView {
 
-    static public void fillLoginForm(WebDriver driver, String dnip, String
-            passwordp) {
-        WebElement dni = driver.findElement(By.name("dni"));
-        dni.click();
-        dni.clear();
-        dni.sendKeys(dnip);
-        WebElement password = driver.findElement(By.name("password"));
-        password.click();
-        password.clear();
-        password.sendKeys(passwordp);
+    static public void fillLoginForm(WebDriver driver, String dni, String password) {
+        WebElement dniField = driver.findElement(By.name("username"));
+        dniField.click();
+        dniField.clear();
+        dniField.sendKeys(dni);
+        WebElement passwordField = driver.findElement(By.name("password"));
+        passwordField.click();
+        passwordField.clear();
+        passwordField.sendKeys(password);
         //Pulsar el boton de Alta.
         By boton = By.className("btn");
         driver.findElement(boton).click();
+    }
+
+    static public void login(WebDriver driver, String username, String password, String expectedText){
+        //Vamos al formulario de login.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+        PO_LoginView.fillLoginForm(driver, username, password);
+        //Comprobamos que entramos en la página privada
+        PO_View.checkElementBy(driver, "text", expectedText);
+    }
+
+    public static void logout(WebDriver driver){
+        String loginText = PO_HomeView.getP().getString("signup.message", PO_Properties.getSPANISH());
+        PO_PrivateView.clickOption(driver, "logout", "text", loginText);
     }
 
 }
